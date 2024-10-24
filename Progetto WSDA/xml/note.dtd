@@ -1,0 +1,10 @@
+<!ELEMENT root (note+)>
+        <!ELEMENT note (date,to,from,object,message)>
+        <!ATTLIST note day CDATA #REQUIRED month CDATA #REQUIRED>
+        <!ATTLIST note year CDATA #IMPLIED>
+            <!ELEMENT date EMPTY>
+            <!ATTLIST date timestamp CDATA #REQUIRED>
+            <!ELEMENT to (#PCDATA)>
+            <!ELEMENT from (#PCDATA)>
+            <!ELEMENT object (#PCDATA)>
+            <!ELEMENT message (#PCDATA)>

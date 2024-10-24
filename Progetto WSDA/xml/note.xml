@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE root SYSTEM "note.dtd">
+
+<root>
+    <note day="" month="">
+        <date timestamp=""/>
+        <to></to>
+        <from></from>
+        <object></object>
+        <message></message>
+    </note>
+    
+    <note day="" month="">
+        <date timestamp=""/>
+        <to></to>
+        <from></from>
+        <object></object>
+        <message></message>
+    </note>
+</root>
