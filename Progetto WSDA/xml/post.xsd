@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<at:post xmlns:at="http://www.w3schools.com"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.w3schools.com comment.xsd">
+    <at:user>
+        <at:username></at:username>
+        <at:usertag></at:usertag>
+    </at:user>
+    <at:content>
+        <at:body></at:body>
+        <at:attach></at:attach>
+    </at:content>
+    <at:content_stats>
+        <at:likes></at:likes>
+        <at:comments></at:comments>
+    </at:content_stats>
+</at:post>

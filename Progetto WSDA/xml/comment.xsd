@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.w3schools.com"
+           xmlns="http://www.w3schools.com"
+           elementFormDefault="qualified">
+
+    <xs:element name="post">
+        <xs:complexType>
+
+            <xs:sequence>
+                <xs:element name="user">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="username"/>
+                            <xs:element name="usertag"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="content">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="body"/>
+                            <xs:element name="attach"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="content_stats">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="likes"/>
+                            <xs:element name="comments"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+
+            <xs:attribute name="date" type="xs:date"/>
+
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
