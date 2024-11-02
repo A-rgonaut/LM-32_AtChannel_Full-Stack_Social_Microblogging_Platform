@@ -1,17 +1,80 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<at:post xmlns:at="http://www.w3schools.com"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.w3schools.com comment.xsd">
-    <at:user>
-        <at:username></at:username>
-        <at:usertag></at:usertag>
-    </at:user>
-    <at:content>
-        <at:body></at:body>
-        <at:attach></at:attach>
-    </at:content>
-    <at:content_stats>
-        <at:likes></at:likes>
-        <at:comments></at:comments>
-    </at:content_stats>
-</at:post>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="posts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="post" type="postType" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="postType">
+        <xs:sequence>
+            <xs:element name="header" type="headerType"/>
+            <xs:element name="main" type="mainType"/>
+            <xs:element name="footer" type="footerType"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[0-9]+"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="headerType">
+        <xs:sequence>
+            <xs:element name="date" type="xs:date"/>
+            <xs:element name="username">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-zA-Z0-9 ]{4,}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="nametag">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="@[a-z]{4,}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="pic" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="mainType">
+        <xs:sequence>
+            <xs:element name="body">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="280"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="attach" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="footerType">
+        <xs:sequence>
+            <xs:element name="likes">
+                <xs:complexType>
+                    <xs:attribute name="nLikes" type="xs:nonNegativeInteger" default="0"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="comments">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="comment" type="postType" minOccurs="0" maxOccurs="5"/>
+                    </xs:sequence>
+                    <xs:attribute name="nComments" type="xs:nonNegativeInteger" default="0"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
