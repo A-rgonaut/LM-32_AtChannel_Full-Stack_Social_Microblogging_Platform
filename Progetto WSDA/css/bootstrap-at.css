@@ -104,6 +104,17 @@ main{
 
         }
 
+        #more_post {
+            button {
+                color: white;
+            }
+
+            button:hover {
+                background-color: #2F2F2F;
+                color: var(--bs-primary);
+            }
+        }
+
         #profile-info{
 
             #profile-edit{
