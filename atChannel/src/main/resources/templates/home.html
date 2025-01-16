@@ -1,0 +1,236 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          http-equiv="X-UA-Compatible">
+
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/at.svg}">
+
+    <script th:src="@{/js/bootstrap-at.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-at.css}" type="text/css">
+</head>
+
+<body>
+
+    <header>
+
+        <div id="post" class="modal fade bg-primary bg-opacity-25" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-4 p-2">
+                    <div class="modal-header border-0">
+                        <div class="row">
+                            <a class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                        </div>
+                    </div>
+                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                    <form th:action="@{/post/add-post}" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-1 p-0">
+                                    <img th:src="@{/assets/img/user_icon.png}" class="rounded-circle img-fluid" alt="...">
+                                </div>
+                                <div class="col-11">
+                                    <label class="visually-hidden" for="text_post"></label>
+                                    <textarea id="text_post" th:name="content" class="bg-transparent border-0 w-100" placeholder="What's the new?" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-secondary d-flex justify-content-between px-0 py-1">
+                            <a class="btn rounded-circle" onclick="document.getElementById('input_image').click()"><i class="bi bi-image"></i></a>
+                            <input id="input_image" type="file" class="visually-hidden">
+                            <button type="submit" th:name="userId" value="6" class="btn btn-primary rounded-pill px-4">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+
+        <div id="main" class="row">
+
+            <div id="navbar" class="col-2 col-lg-3 sticky-top h-100 px-3 px-lg-5">
+                <a class="btn rounded-pill fs-5 mb-3" href="#">
+                    <i class="bi bi-at"></i><span class="d-none d-lg-inline">Channel</span>
+                </a><br>
+
+                <a class="btn rounded-pill fs-5 mb-3" href="#">
+                    <i class="bi bi-house"></i><span class="d-none d-lg-inline">&emsp;Home</span>
+                </a><br>
+
+                <a class="btn rounded-pill fs-5 mb-3" href="/at-channel/get-xml">
+                    <i class="bi bi-search"></i><span class="d-none d-lg-inline">&emsp;Explore</span>
+                </a><br>
+
+                <a class="btn rounded-pill fs-5 mb-3" href="#">
+                    <i class="bi bi-bell"></i><span class="d-none d-lg-inline">&emsp;Notifications</span>
+                </a><br>
+
+                <a class="btn rounded-pill fs-5 mb-3" href="#">
+                    <i class="bi bi-envelope"></i><span class="d-none d-lg-inline">&emsp;Messages</span>
+                </a><br>
+
+                <a class="btn rounded-pill fs-5 mb-3" href="/profile">
+                    <i class="bi bi-person"></i><span class="d-none d-lg-inline">&emsp;Profile</span>
+                </a><br>
+
+                <a class="btn rounded-pill fs-5 mb-3" href="/at-channel/post/8">
+                    <i class="bi bi-gear"></i><span class="d-none d-lg-inline">&emsp;Settings</span>
+                </a><br>
+
+                <a class="btn btn-primary rounded-pill fs-5 mb-3 py-2 w-100" data-bs-toggle="modal" data-bs-target="#post">
+                    <span class="d-none d-sm-inline">Post</span>
+                    <i class="d-inline d-sm-none bi bi-pencil-square"></i>
+                </a>
+            </div>
+
+            <div id="home" class="col-10 col-lg-6 border-2 border-dark border-start border-end">
+
+                <div id="switch" class="row sticky-top border-2 border-dark border-bottom">
+                    <div class="col-6 btn px-5 rounded-0 fs-5">
+                        <span id="recommended-btn" class="selected">Recommended</span>
+                    </div>
+                    <div class="col-6 btn px-5 rounded-0 fs-5">
+                        <span id="follow-btn">Follow</span>
+                    </div>
+                </div>
+
+                <div id="recommended" class="container p-0">
+                    
+                    <script>
+                        initFeed("#recommended");
+                    </script>
+                </div>
+
+                <div id="follow" class="container visually-hidden p-0">
+                    <script>
+                        $.get("/feed/init-feed", function (data) {
+                            $("#follow").append(data);
+                        });
+                    </script>
+                </div>
+
+                <script>
+
+                    let is_active = $("#recommended")[0]
+
+                    $("#recommended-btn").parent().click(function(){
+                        $("#recommended-btn").addClass("selected");
+                        $("#follow-btn").removeClass("selected");
+                        $("#recommended").removeClass("visually-hidden");
+                        $("#follow").addClass("visually-hidden");
+                        document.documentElement.scrollTop = 0;
+                        is_active = $("#recommended")[0];
+                    })
+
+                    $("#follow-btn").parent().click(function(){
+                        $("#follow-btn").addClass("selected");
+                        $("#recommended-btn").removeClass("selected");
+                        $("#follow").removeClass("visually-hidden");
+                        $("#recommended").addClass("visually-hidden");
+                        document.documentElement.scrollTop = 0;
+                        is_active = $("#follow")[0];
+                    })
+
+                </script>
+
+                <div id="more_post" class="container p-2 text-center">
+                    <button class="btn rounded-pill" onclick="loadFeed('#' + is_active.id);">More...</button>
+                </div>
+
+            </div>
+
+            <div id="utility" class="d-none d-lg-block col-3 sticky-top h-100 px-3 px-lg-5 py-1">
+
+                <div class="row mb-5">
+                    <form action="" method="POST">
+                        <input class="form-control bg-dark border-0 rounded-pill text-white px-4 py-2" type="search" placeholder="Search" id="example-search-input">
+                    </form>
+                </div>
+
+                <div class="row border border-2 border-dark rounded-4 mb-5 p-2">
+
+                    <span class="fs-4 mb-4">Trends</span><br>
+
+                    <div>
+                        <span class="text-secondary">
+                            position
+                        </span>
+                        <blockquote class="blockquote">
+                            <p>#Trend</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            #12345 posts
+                        </figcaption>
+                    </div>
+
+                    <div>
+                        <span class="text-secondary">
+                            position
+                        </span>
+                        <blockquote class="blockquote">
+                            <p>#Trend</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            #12345 posts
+                        </figcaption>
+                    </div>
+
+                    <div>
+                        <span class="text-secondary">
+                            position
+                        </span>
+                        <blockquote class="blockquote">
+                            <p>#Trend</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            #12345 posts
+                        </figcaption>
+                    </div>
+
+                    <div>
+                        <span class="text-secondary">
+                            position
+                        </span>
+                        <blockquote class="blockquote">
+                            <p>#Trend</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            #12345 posts
+                        </figcaption>
+                    </div>
+
+                    <div>
+                        <span class="text-secondary">
+                            position
+                        </span>
+                        <blockquote class="blockquote">
+                            <p>#Trend</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            #12345 posts
+                        </figcaption>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class=" sticky-bottom border-2 border-top border-dark text-center align-middle w-100 p-0">
+        <p>Copyright &copy; - <i class="bi bi-at"></i>Channel 2024</p>
+    </footer>
+
+</body>
+</html>

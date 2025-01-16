@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          http-equiv="X-UA-Compatible">
+
+    <title>Sign Up</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/at.svg}">
+
+    <script th:src="@{/js/bootstrap-at.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-at.css}">
+</head>
+
+<body>
+
+<main>
+
+    <div id="sign-in-up" class="container col-9 col-sm-7 col-md-5 col-lg-3 bg-dark position-absolute top-50 start-50 translate-middle rounded-4 p-3">
+        <div class="row text-center border-2 border-bottom border-secondary pb-2">
+            <a class="btn rounded-pill fs-2 text-primary" href="#">
+                <i class="bi bi-at">Channel</i>
+            </a>
+        </div>
+
+        <div class="row text-start border-2 border-bottom border-secondary py-2">
+            <form th:action="@{/sign/register}" method="POST">
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <input id="firstname_sign_up" type="text" class="form-control border-0 rounded-pill mb-3" placeholder="Firstname" name="firstname">
+                    </div>
+                    <div class="col-6">
+                        <input id="lastname_sign_up" type="text" class="form-control border-0 rounded-pill mb-3" placeholder="Lastname" name="lastname">
+                    </div>
+                </div>
+                <input id="email_sign_in" type="email" class="form-control border-0 rounded-pill mb-3" placeholder="Email" name="email">
+                <input id="username_sign_up" type="text" class="form-control border-0 rounded-pill mb-3" placeholder="Username" name="username">
+                <input id="password_sign_in" type="password" class="form-control border-0 rounded-pill mb-3" placeholder="Password" name="password">
+                <input id="cf_password_sign_in" type="password" class="form-control border-0 rounded-pill mb-3" placeholder="Confirm password" name="Cpassword">
+                <input class="form-check-input mx-2" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Accept all terms and conditions
+                </label><br><br>
+                <button type="submit" class="btn btn-primary rounded-pill my-3 py-2 w-100" data-bs-toggle="modal" data-bs-target="#post">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="row text-center pt-2">
+            <p>Already have an account?
+                <a href="/sign-in">Sign in now</a>
+            </p>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
