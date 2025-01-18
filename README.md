@@ -6,4 +6,4 @@ Web System Design and Architecture A.A 2024/2025 - Prof. La Cascia
 
 Edit by: Andrea Spinelli
 
-Realizzazione di un microblogging in fullstack Java facendo uso di API esterne, strutturato nelle componenti front-end, back-end e DB, mediante l’uso dei framework Spring e Bootstrap.
+Realizzazione di una web application di microblogging in fullstack Java, strutturato nelle componenti front-end, back-end e DB, mediante l’uso dei framework Spring e Bootstrap.
